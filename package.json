@@ -1,0 +1,17 @@
+{
+  "name": "ReactNativeHackerNews",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh"
+  },
+  "dependencies": {
+    "events": "^1.0.2",
+    "htmlparser2": "^3.8.2",
+    "moment": "^2.9.0",
+    "react-native": "^0.3.1",
+    "underscore": "^1.7.0",
+    "url-join": "0.0.1",
+    "xtend": "^4.0.0"
+  }
+}
