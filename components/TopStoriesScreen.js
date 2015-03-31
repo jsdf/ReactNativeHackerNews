@@ -11,6 +11,7 @@ var Text = require('./Text')
 var StoreWatchMixin = require('./StoreWatchMixin')
 var StoryListItem = require('./StoryListItem')
 var Loading = require('./Loading')
+var RefreshableListView = require('./RefreshableListView')
 
 var baseDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
 
@@ -24,7 +25,8 @@ var TopStoriesScreen = React.createClass({
     }
   },
   componentDidMount() {
-    this.loadTopStories()
+    var topStories = this.getTopStories()
+    if (!(topStories && topStories.length)) this.loadTopStories()
   },
   getStoreWatches() {
     this.watchStore(TopStory, _.debounce(() => {
@@ -34,8 +36,7 @@ var TopStoriesScreen = React.createClass({
     }, 100))
   },
   loadTopStories() {
-    var topStories = this.getTopStories()
-    if (!(topStories && topStories.length)) TopStory.fetch()
+    return TopStory.fetch()
   },
   getTopStories() {
     return TopStory.ordered()
@@ -62,9 +63,11 @@ var TopStoriesScreen = React.createClass({
       )
     } else {
       return (
-        <ListView
+        <RefreshableListView
           dataSource={this.state.dataSource}
           renderRow={this.renderStory}
+          loadData={this.loadTopStories}
+          refreshDescription="top stories"
         />
       )
     }

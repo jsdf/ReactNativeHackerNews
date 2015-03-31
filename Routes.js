@@ -20,6 +20,13 @@ class Routes {
       passProps: {url: story.url}
     }
   }
+  static Link(url) {
+    return {
+      component: require('./components/ArticleScreen'),
+      title: url,
+      passProps: {url: url}
+    }
+  }
   static Comments(story) {
     if (story == null) throw new Error('missing argument: story')
 

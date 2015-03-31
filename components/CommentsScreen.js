@@ -14,6 +14,7 @@ var Text = require('./Text')
 var Badge = require('./Badge')
 var Loading = require('./Loading')
 var Comment = require('./Comment')
+var RefreshableListView = require('./RefreshableListView')
 
 var baseDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
 
@@ -27,7 +28,7 @@ var CommentsScreen = React.createClass({
     }
   },
   componentDidMount() {
-    this.loadStory()
+    if (!this.getStory()) this.loadStory()
   },
   getStoreWatches() {
     this.watchStore(Story, _.debounce(() => {
@@ -39,7 +40,7 @@ var CommentsScreen = React.createClass({
     }, 100))
   },
   loadStory() {
-    if (!this.getStory()) Story.fetch(this.props.storyId)
+    return Story.fetch(this.props.storyId)
   },
   getStory() {
     return Story.get(this.props.storyId)
@@ -51,9 +52,6 @@ var CommentsScreen = React.createClass({
   isLoaded() {
     return this.getComments() != null
   },
-  renderCommentsHeader() {
-    return (<Text>showing {this.getComments().length} comments</Text>)
-  },
   renderComment(comment) {
     return <Comment comment={comment} />
   },
@@ -62,9 +60,11 @@ var CommentsScreen = React.createClass({
       return <Loading>comments</Loading>
     } else {
       return (
-        <ListView
+        <RefreshableListView
           dataSource={this.state.dataSource}
           renderRow={this.renderComment}
+          loadData={this.loadStory}
+          refreshDescription="comments"
         />
       )
     }

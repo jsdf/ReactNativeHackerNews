@@ -8,28 +8,7 @@ var {
 
 var View = require('./View')
 var Text = require('./Text')
-
-
-function htmlToElement(id, html) {
-  var htmlparser = require("htmlparser2")
-  var parser = new htmlparser.Parser({
-      onopentag: function(name, attribs){
-          if(name === "script" && attribs.type === "text/javascript"){
-              console.log("JS! Hooray!")
-          }
-      },
-      ontext: function(text){
-          console.log("-->", text)
-      },
-      onclosetag: function(tagname){
-          if(tagname === "script"){
-              console.log("That's it?!")
-          }
-      }
-  })
-  parser.write("Xyz <script type='text/javascript'>var foo = '<<bar>>'</ script>")
-  parser.end()
-}
+var HTML = require('./HTML')
 
 var Comment = React.createClass({
   getInitialState() {
@@ -41,10 +20,9 @@ var Comment = React.createClass({
     this.setState({open: !this.state.open})
   },
   renderBody(comment) {
-    var text = (comment.text||'').split('<p>').join('\n\n')
     return (
       <View>
-        <Text style={styles.commentText}>{text}</Text>
+        <HTML value={comment.text} />
         {comment.childItems ? <CommentList comments={comment.childItems} /> : null}
       </View>
     )
