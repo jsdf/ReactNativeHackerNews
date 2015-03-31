@@ -11,9 +11,9 @@ var Loading = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <View style={[styles.loading, styles.container]}>
+        <View style={[styles.loading]}>
           <Text>Loading {this.props.children}</Text>
-          <ActivityIndicatorIOS />
+          <ActivityIndicatorIOS style={{alignSelf: 'center'}} />
         </View>
       </View>
     )
@@ -28,7 +28,8 @@ var styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   loading: {
-    margin: 100,
+    justifyContent: 'space-around',
+    margin: 50,
     height: 100,
   },
 })
