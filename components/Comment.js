@@ -4,11 +4,13 @@ var {
   TouchableHighlight,
   StyleSheet,
   Image,
+  PixelRatio,
 } = React
 
 var View = require('./View')
 var Text = require('./Text')
 var HTML = require('./HTML')
+var colors = require('./colors')
 
 var Comment = React.createClass({
   getInitialState() {
@@ -21,7 +23,7 @@ var Comment = React.createClass({
   },
   renderBody(comment) {
     return (
-      <View>
+      <View style={styles.commentBody}>
         <HTML value={comment.text} />
         {comment.childItems ? <CommentList comments={comment.childItems} /> : null}
       </View>
@@ -34,8 +36,8 @@ var Comment = React.createClass({
     if (comment == null) return null
 
     return (
-      <TouchableHighlight onPress={this.handleDisclosureClick} underlayColor="white">
-        <View style={styles.comment}>
+      <View style={styles.comment}>
+        <TouchableHighlight onPress={this.handleDisclosureClick} underlayColor="white">
           <View style={[styles.disclosureRow, styles.inline]}>
             <Image
               source={open ? require('image!disclosure90') : require('image!disclosure')}
@@ -46,9 +48,9 @@ var Comment = React.createClass({
               {moment(comment.time*1000).fromNow()} by {comment.by}
             </Text>
           </View>
-          {open ? this.renderBody(comment) : null}
-        </View>
-      </TouchableHighlight>
+        </TouchableHighlight>
+        {open ? this.renderBody(comment) : null}
+      </View>
     )
   }
 })
@@ -74,17 +76,25 @@ var styles = StyleSheet.create({
     opacity: 0.3,
   },
   textMuted: {
-    color: '#BBBBBB'
+    color: colors.grey
   },
   comment: {
     margin: 4,
     padding: 4,
   },
+  commentBody: {
+    paddingLeft: 10,
+    borderLeftColor: colors.grey,
+    borderLeftWidth: 1 / PixelRatio.get(),
+  },
   disclosure: {
-    width: 16,
-    height: 16,
+    width: 14,
+    height: 14,
+    marginLeft: 2,
+    marginRight: 8,
   },
   disclosureRow: {
+    paddingLeft: 0,
     paddingTop: 4,
     paddingBottom: 4,
   },
