@@ -2,32 +2,16 @@ var _ = require('underscore')
 var htmlparser = require('../vendor/htmlparser2')
 var entities = require('../vendor/entities')
 var React = require('react-native')
+var {
+  LinkingIOS,
+  StyleSheet,
+} = React
 
 var View = require('./View')
 var Text = require('./Text')
+var colors = require('./colors')
 
-function logError(err) {
-  console && console.error && console.error(err)
-}
-
-function domToElement(dom) {
-  if (!dom) return <Text />
-
-  return dom.map((node, index) => {
-    if (node.type == 'text') {
-      return <Text key={index}>{entities.decodeHTML(node.data)}</Text>
-    }
-    if (node.type == 'tag') {
-      if (node.name == 'p') {
-        return (
-          <Text key={index}>{domToElement(node.children)}{'\n\n'}</Text>
-        )
-      }
-      // TODO: implement i, b, pre
-      return <Text key={index}>{domToElement(node.children)}</Text>
-    }
-})
-}
+var PARAGRAPH_BREAK = '\n\n'
 
 function htmlToElement(rawHtml, done) {
   var handler = new htmlparser.DomHandler(function (err, dom) {
@@ -38,6 +22,50 @@ function htmlToElement(rawHtml, done) {
   parser.write(rawHtml)
   parser.done()
 }
+
+function domToElement(dom, parent) {
+  if (!dom) return null
+
+  return dom.map((node, index, list) => {
+    if (node.type == 'text') {
+      return (
+        <Text key={index} style={parent ? styles[parent.name] : null}>
+          {entities.decodeHTML(node.data)}
+        </Text>
+      )
+    }
+    if (node.type == 'tag') {
+      var touchHandler = null
+      if (node.name == 'a' && node.attribs && node.attribs.href) {
+        touchHandler = () => LinkingIOS.openURL(entities.decodeHTML(node.attribs.href))
+      }
+
+      return (
+        <Text key={index} onPress={touchHandler}>
+          {domToElement(node.children, node)}
+          {node.name == 'p' && index < list.length-1 ? PARAGRAPH_BREAK : null}
+        </Text>
+      )
+    }
+  })
+}
+
+var boldStyle = {fontWeight: '500'}
+var italicStyle = {fontStyle: 'italic'}
+var codeStyle = {fontFamily: 'Menlo'}
+
+var styles = StyleSheet.create({
+  b: boldStyle,
+  strong: boldStyle,
+  i: italicStyle,
+  em: italicStyle,
+  pre: codeStyle,
+  code: codeStyle,
+  a: {
+    fontWeight: '500',
+    color: colors.blue,
+  },
+})
 
 var HTML = React.createClass({
   mixins: [
@@ -63,7 +91,7 @@ var HTML = React.createClass({
     htmlToElement(this.props.value, (err, element) => {
       this.renderingHtml = false
 
-      if (err) return logError(err)
+      if (err) return console.error(err)
 
       if (this.isMounted()) this.setState({element})
     })

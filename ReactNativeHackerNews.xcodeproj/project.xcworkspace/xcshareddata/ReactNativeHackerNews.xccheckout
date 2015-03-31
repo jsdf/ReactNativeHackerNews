@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>382509EF-E93C-4744-BD99-C09AA9E555CA</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ReactNativeHackerNews</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>19EF99C2D44FB5C98C7FBFCB53F31BE736AB780D</key>
+		<string>github.com:jsdf/ReactNativeHackerNews.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ReactNativeHackerNews.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>19EF99C2D44FB5C98C7FBFCB53F31BE736AB780D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:jsdf/ReactNativeHackerNews.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>19EF99C2D44FB5C98C7FBFCB53F31BE736AB780D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>19EF99C2D44FB5C98C7FBFCB53F31BE736AB780D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ReactNativeHackerNews</string>
+		</dict>
+	</array>
+</dict>
+</plist>
