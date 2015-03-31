@@ -11,5 +11,4 @@ This app is a descendent of my isomorphic React-based Hacker News mobile web app
 ![React Native Hacker News](http://i.imgur.com/gVmrxDe.png)
 ![React Native Hacker News Comments](http://i.imgur.com/FYOgBYc.png)
 
-Speech Bubble icon by Michael Zenaty (https://thenounproject.com/term/speech-bubble/60326/)
-
+Speech Bubble icon (https://thenounproject.com/term/speech-bubble/60326/) © Michael Zenaty, available under a [Creative Commons – Attribution (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/us/) license.
