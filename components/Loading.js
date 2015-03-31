@@ -30,7 +30,7 @@ var styles = StyleSheet.create({
   loading: {
     justifyContent: 'space-around',
     margin: 50,
-    height: 100,
+    height: 70,
   },
 })
 
