@@ -5,6 +5,7 @@ var {
   ListView,
   StyleSheet,
 } = React
+var RefreshableListView = require('react-native-refreshable-listview')
 
 var Story = require('../stores/Story')
 var Routes = require('../Routes')
@@ -14,7 +15,6 @@ var Text = require('./Text')
 var Badge = require('./Badge')
 var Loading = require('./Loading')
 var Comment = require('./Comment')
-var RefreshableListView = require('./RefreshableListView')
 
 var baseDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
 
@@ -39,8 +39,8 @@ var CommentsScreen = React.createClass({
       }
     }, 100))
   },
-  loadStory() {
-    return Story.fetch(this.props.storyId)
+  loadStory(callback) {
+    Story.fetch(this.props.storyId).then(callback)
   },
   getStory() {
     return Story.get(this.props.storyId)
@@ -64,7 +64,7 @@ var CommentsScreen = React.createClass({
           dataSource={this.state.dataSource}
           renderRow={this.renderComment}
           loadData={this.loadStory}
-          refreshDescription="comments"
+          refreshDescription="Fetching comments"
         />
       )
     }

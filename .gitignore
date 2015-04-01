@@ -29,6 +29,10 @@ nbproject
 *.sublime-workspace
 .idea
 
+# Xcode
+UserInterfaceState.xcuserstate
+xcuserdata
+
 # Komodo
 *.komodoproject
 .komodotools
@@ -43,3 +47,4 @@ example/output/
 main.jsbundle
 
 images/generated/
+

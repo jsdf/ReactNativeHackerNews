@@ -6,10 +6,10 @@ var {
   Image,
   PixelRatio,
 } = React
+var HTMLView = require('react-native-htmlview')
 
 var View = require('./View')
 var Text = require('./Text')
-var HTML = require('./HTML')
 var colors = require('./colors')
 
 var Comment = React.createClass({
@@ -24,7 +24,7 @@ var Comment = React.createClass({
   renderBody(comment) {
     return (
       <View style={styles.commentBody}>
-        <HTML value={comment.text} />
+        <HTMLView value={comment.text} />
         {comment.childItems ? <CommentList comments={comment.childItems} /> : null}
       </View>
     )

@@ -3,6 +3,7 @@ var React = require('react-native')
 var {
   ListView,
 } = React
+var RefreshableListView = require('react-native-refreshable-listview')
 
 var Routes = require('../Routes')
 var TopStory = require('../stores/TopStory')
@@ -11,7 +12,6 @@ var Text = require('./Text')
 var StoreWatchMixin = require('./StoreWatchMixin')
 var StoryListItem = require('./StoryListItem')
 var Loading = require('./Loading')
-var RefreshableListView = require('./RefreshableListView')
 
 var baseDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
 
@@ -67,7 +67,7 @@ var TopStoriesScreen = React.createClass({
           dataSource={this.state.dataSource}
           renderRow={this.renderStory}
           loadData={this.loadTopStories}
-          refreshDescription="top stories"
+          refreshDescription="Refreshing top stories"
         />
       )
     }
