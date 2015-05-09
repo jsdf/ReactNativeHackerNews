@@ -2,6 +2,7 @@ var _ = require('underscore')
 var React = require('react-native')
 var {
   ListView,
+  StyleSheet,
 } = React
 var RefreshableListView = require('react-native-refreshable-listview')
 
@@ -68,6 +69,9 @@ var TopStoriesScreen = React.createClass({
           renderRow={this.renderStory}
           loadData={this.loadTopStories}
           refreshDescription="Refreshing top stories"
+          refreshingIndictatorComponent={
+            <RefreshableListView.RefreshingIndicator stylesheet={indicatorStylesheet} />
+          }
         />
       )
     }
@@ -75,6 +79,14 @@ var TopStoriesScreen = React.createClass({
   render() {
     return this.renderStoriesListView()
   }
+})
+
+var indicatorStylesheet = StyleSheet.create({
+  wrapper: {
+    backgroundColor: '#ffffff',
+    height: 60,
+    marginTop: 10,
+  },
 })
 
 module.exports = TopStoriesScreen
