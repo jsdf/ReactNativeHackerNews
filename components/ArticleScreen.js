@@ -27,7 +27,7 @@ var ArticleScreen = React.createClass({
       <WebView
         url={this.props.url}
         renderError={this.renderError}
-        renderLoading={this.renderError}
+        renderLoading={this.renderLoading}
       />
     )
   }
