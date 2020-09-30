@@ -1,6 +1,6 @@
-# ReactNativeHackerNews
+React Native Hacker News.
 
-React Native-based Hacker News reading app
+React Native-based Hacker News reading app.
 
 Uses [hacker-news-mobile-api](https://github.com/jsdf/hacker-news-mobile-api)
 
